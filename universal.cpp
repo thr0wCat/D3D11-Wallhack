@@ -77,6 +77,49 @@ ID3D11ShaderResourceView* ShaderResourceView;
 bool logger = false;
 int countnum = 0;
 char szString[64];
+int g_nFPS = 0;
+
+class AnimFrameCounter
+{
+public:
+    AnimFrameCounter()
+    {
+        m_pfFrequency = 1.f;
+        m_lastTick.QuadPart = 0xffffffffffffffff;
+        m_fpsCounter = 0;
+        LARGE_INTEGER pff;
+        QueryPerformanceFrequency(&pff);
+        setFrequency((float)pff.QuadPart);
+    }
+    void setFrequency(float bf) { m_pfFrequency = bf; }
+    void onFrameStart()
+    {
+        LARGE_INTEGER pfc;
+        QueryPerformanceCounter(&pfc);
+        if(m_lastTick.QuadPart == 0xffffffffffffffff)
+        {
+            m_lastTick = pfc;
+            m_fpsCounter = 0;
+            return;
+        }
+        m_fpsCounter ++;
+        float intv = (float)(pfc.QuadPart - m_lastTick.QuadPart) / m_pfFrequency;
+        if(intv >= 1.f)
+        {
+            //qDebug() << "FPS: " << m_fpsCounter;
+            g_nFPS = m_fpsCounter;
+            m_lastTick = pfc;
+            m_fpsCounter = 0;
+        }
+    }
+
+protected:
+    float						m_pfFrequency;
+    LARGE_INTEGER				m_lastTick;
+    int						    m_fpsCounter;
+};
+
+AnimFrameCounter        g_frameCounter;
 
 //==========================================================================================================================
 
@@ -142,20 +185,26 @@ HRESULT __stdcall hookD3D11Present(IDXGISwapChain* pSwapChain, UINT SyncInterval
 		//wireframe
 		D3D11_RASTERIZER_DESC rwDesc;
 		pContext->RSGetState(&rwState); // retrieve the current state
-		rwState->GetDesc(&rwDesc);    // get the desc of the state
-		rwDesc.FillMode = D3D11_FILL_WIREFRAME;
-		rwDesc.CullMode = D3D11_CULL_NONE;
-		// create a whole new rasterizer state
-		pDevice->CreateRasterizerState(&rwDesc, &rwState);
+        if(rwState)
+        {
+            rwState->GetDesc(&rwDesc);    // get the desc of the state
+            rwDesc.FillMode = D3D11_FILL_WIREFRAME;
+            rwDesc.CullMode = D3D11_CULL_NONE;
+            // create a whole new rasterizer state
+            pDevice->CreateRasterizerState(&rwDesc, &rwState);
+        }
 
 		//solid
 		D3D11_RASTERIZER_DESC rsDesc;
 		pContext->RSGetState(&rsState); // retrieve the current state
-		rsState->GetDesc(&rsDesc);    // get the desc of the state
-		rsDesc.FillMode = D3D11_FILL_SOLID;
-		rsDesc.CullMode = D3D11_CULL_BACK;
-		// create a whole new rasterizer state
-		pDevice->CreateRasterizerState(&rsDesc, &rsState);
+        if(rsState)
+        {
+            rsState->GetDesc(&rsDesc);    // get the desc of the state
+            rsDesc.FillMode = D3D11_FILL_SOLID;
+            rsDesc.CullMode = D3D11_CULL_BACK;
+            // create a whole new rasterizer state
+            pDevice->CreateRasterizerState(&rsDesc, &rsState);
+        }
 
 		//create font
 		HRESULT hResult = FW1CreateFactory(FW1_VERSION, &pFW1Factory);
@@ -173,6 +222,8 @@ HRESULT __stdcall hookD3D11Present(IDXGISwapChain* pSwapChain, UINT SyncInterval
 		firstTime = false;
 	}
 
+    g_frameCounter.onFrameStart();
+
 	//shaders
 	if (!psRed)
 	GenerateShader(pDevice, &psRed, 1.0f, 0.0f, 0.0f);
@@ -184,8 +235,12 @@ HRESULT __stdcall hookD3D11Present(IDXGISwapChain* pSwapChain, UINT SyncInterval
 	//call before you draw
 	pContext->OMSetRenderTargets(1, &RenderTargetView, NULL);
 	//draw
-	if (pFontWrapper)
-	pFontWrapper->DrawString(pContext, L"D3D11 Hook", 14, 16.0f, 16.0f, 0xffff1612, FW1_RESTORESTATE);
+    if(pFontWrapper)
+    {
+        wchar_t buf[64];
+        _snwprintf_s(buf, 64, L"FPS: %d", g_nFPS);
+        pFontWrapper->DrawString(pContext, buf, 14, 16.0f, 16.0f, 0xffff1612, FW1_RESTORESTATE);
+    }
 
 
 	//logger
@@ -392,8 +447,8 @@ DWORD __stdcall InitializeHook(LPVOID)
 	HMODULE hDXGIDLL = 0;
 	do
 	{
-		hDXGIDLL = GetModuleHandle("dxgi.dll");
-		Sleep(8000);
+		hDXGIDLL = GetModuleHandleA("dxgi.dll");
+		Sleep(1000);
 	} while (!hDXGIDLL);
 	Sleep(100);
 
@@ -459,7 +514,7 @@ DWORD __stdcall InitializeHook(LPVOID)
 		&obtainedLevel,
 		&pContext)))
 	{
-		MessageBox(hWnd, "Failed to create directX device and swapchain!", "Error", MB_ICONERROR);
+		MessageBoxA(hWnd, "Failed to create directX device and swapchain!", "Error", MB_ICONERROR);
 		return NULL;
 	}
 
@@ -515,7 +570,7 @@ BOOL __stdcall DllMain(HINSTANCE hModule, DWORD dwReason, LPVOID lpReserved)
 	{
 	case DLL_PROCESS_ATTACH: // A process is loading the DLL.
 		DisableThreadLibraryCalls(hModule);
-		GetModuleFileName(hModule, dlldir, 512);
+		GetModuleFileNameA(hModule, dlldir, 512);
 		for (size_t i = strlen(dlldir); i > 0; i--) { if (dlldir[i] == '\\') { dlldir[i + 1] = 0; break; } }
 		CreateThread(NULL, 0, InitializeHook, NULL, 0, NULL);
 		break;
