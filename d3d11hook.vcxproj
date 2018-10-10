@@ -22,7 +22,7 @@
     <ProjectGuid>{119F3BCC-4D4E-4FDA-877E-A708963BB87A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>d3d11hook</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -80,6 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,13 +89,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;D3D11HOOK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <AdditionalLibraryDirectories>D:\Mine\gslib\build\vs2017\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>fxc /T vs_4_0 /E "DrawNumberVS" /Fd /Zi /Fh "DrawNumberVS.h" "DrawNumber.hlsl"
+fxc /T ps_4_0 /E "DrawNumberPS" /Fd /Zi /Fh "DrawNumberPS.h" "DrawNumber.hlsl"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -103,11 +110,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;D3D11HOOK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Mine\gslib\build\vs2017\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>fxc /T vs_4_0 /E "DrawNumberVS" /Fd /Zi /Fh "DrawNumberVS.h" "DrawNumber.hlsl"
+fxc /T ps_4_0 /E "DrawNumberPS" /Fd /Zi /Fh "DrawNumberPS.h" "DrawNumber.hlsl"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -118,13 +131,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;D3D11HOOK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Mine\gslib\build\vs2017\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>fxc /T vs_4_0 /E "DrawNumberVS" /Fd /Zi /Fh "DrawNumberVS.h" "DrawNumber.hlsl"
+fxc /T ps_4_0 /E "DrawNumberPS" /Fd /Zi /Fh "DrawNumberPS.h" "DrawNumber.hlsl"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -135,32 +154,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;D3D11HOOK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Mine\gslib\build\vs2017\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>fxc /T vs_4_0 /E "DrawNumberVS" /Fd /Zi /Fh "DrawNumberVS.h" "DrawNumber.hlsl"
+fxc /T ps_4_0 /E "DrawNumberPS" /Fd /Zi /Fh "DrawNumberPS.h" "DrawNumber.hlsl"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FW1FontWrapper\CFW1ColorRGBA.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1DWriteRenderTarget.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1Factory.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1FontWrapper.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1GlyphAtlas.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1GlyphProvider.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1GlyphRenderStates.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1GlyphSheet.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1GlyphVertexDrawer.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1Object.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1StateSaver.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1TextGeometry.h" />
-    <ClInclude Include="FW1FontWrapper\CFW1TextRenderer.h" />
-    <ClInclude Include="FW1FontWrapper\FW1CompileSettings.h" />
-    <ClInclude Include="FW1FontWrapper\FW1FontWrapper.h" />
-    <ClInclude Include="FW1FontWrapper\FW1Precompiled.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="DrawNumber.h" />
     <ClInclude Include="MinHook\src\buffer.h" />
     <ClInclude Include="MinHook\src\hde\hde32.h" />
     <ClInclude Include="MinHook\src\hde\hde64.h" />
@@ -168,39 +177,49 @@
     <ClInclude Include="MinHook\src\hde\table32.h" />
     <ClInclude Include="MinHook\src\hde\table64.h" />
     <ClInclude Include="MinHook\src\trampoline.h" />
+    <ClInclude Include="ReadImage.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FW1FontWrapper\CFW1ColorRGBA.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1ColorRGBAInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1DWriteRenderTarget.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1DWriteRenderTargetInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1Factory.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1FactoryInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1FontWrapper.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1FontWrapperInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphAtlas.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphAtlasInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphProvider.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphProviderInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphRenderStates.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphRenderStatesInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphSheet.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphSheetInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphVertexDrawer.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1GlyphVertexDrawerInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1StateSaver.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1TextGeometry.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1TextGeometryInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1TextRenderer.cpp" />
-    <ClCompile Include="FW1FontWrapper\CFW1TextRendererInterface.cpp" />
-    <ClCompile Include="FW1FontWrapper\FW1FontWrapper.cpp" />
-    <ClCompile Include="FW1FontWrapper\FW1Precompiled.cpp" />
+    <ClCompile Include="DrawNumber.cpp" />
+    <ClCompile Include="libpng\intel\filter_sse2_intrinsics.c" />
+    <ClCompile Include="libpng\intel\intel_init.c" />
+    <ClCompile Include="libpng\png.c" />
+    <ClCompile Include="libpng\pngerror.c" />
+    <ClCompile Include="libpng\pngget.c" />
+    <ClCompile Include="libpng\pngmem.c" />
+    <ClCompile Include="libpng\pngpread.c" />
+    <ClCompile Include="libpng\pngread.c" />
+    <ClCompile Include="libpng\pngrio.c" />
+    <ClCompile Include="libpng\pngrtran.c" />
+    <ClCompile Include="libpng\pngrutil.c" />
+    <ClCompile Include="libpng\pngset.c" />
+    <ClCompile Include="libpng\pngtrans.c" />
+    <ClCompile Include="libpng\pngwio.c" />
+    <ClCompile Include="libpng\pngwrite.c" />
+    <ClCompile Include="libpng\pngwtran.c" />
+    <ClCompile Include="libpng\pngwutil.c" />
     <ClCompile Include="MinHook\src\buffer.c" />
     <ClCompile Include="MinHook\src\hde\hde32.c" />
     <ClCompile Include="MinHook\src\hde\hde64.c" />
     <ClCompile Include="MinHook\src\hook.c" />
     <ClCompile Include="MinHook\src\trampoline.c" />
+    <ClCompile Include="ReadImage.cpp" />
     <ClCompile Include="universal.cpp" />
+    <ClCompile Include="zlib\adler32.c" />
+    <ClCompile Include="zlib\compress.c" />
+    <ClCompile Include="zlib\crc32.c" />
+    <ClCompile Include="zlib\deflate.c" />
+    <ClCompile Include="zlib\gzclose.c" />
+    <ClCompile Include="zlib\gzlib.c" />
+    <ClCompile Include="zlib\gzread.c" />
+    <ClCompile Include="zlib\gzwrite.c" />
+    <ClCompile Include="zlib\infback.c" />
+    <ClCompile Include="zlib\inffast.c" />
+    <ClCompile Include="zlib\inflate.c" />
+    <ClCompile Include="zlib\inftrees.c" />
+    <ClCompile Include="zlib\trees.c" />
+    <ClCompile Include="zlib\uncompr.c" />
+    <ClCompile Include="zlib\zutil.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
