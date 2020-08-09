@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d3d11hook", "d3d11hook.vcxproj", "{119F3BCC-4D4E-4FDA-877E-A708963BB87A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FPSViewer", "..\FPSViewer\FPSViewer\FPSViewer.vcxproj", "{28D1F0D2-07B2-4136-B980-FB7D530B136E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inject", "..\inject\inject\inject.vcxproj", "{81FDDF0D-C2E6-466C-BC06-F70270E881B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +25,27 @@ Global
 		{119F3BCC-4D4E-4FDA-877E-A708963BB87A}.Release|x64.Build.0 = Release|x64
 		{119F3BCC-4D4E-4FDA-877E-A708963BB87A}.Release|x86.ActiveCfg = Release|Win32
 		{119F3BCC-4D4E-4FDA-877E-A708963BB87A}.Release|x86.Build.0 = Release|Win32
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Debug|x64.ActiveCfg = Debug|x64
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Debug|x64.Build.0 = Debug|x64
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Debug|x86.ActiveCfg = Debug|Win32
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Debug|x86.Build.0 = Debug|Win32
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Release|x64.ActiveCfg = Release|x64
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Release|x64.Build.0 = Release|x64
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Release|x86.ActiveCfg = Release|Win32
+		{28D1F0D2-07B2-4136-B980-FB7D530B136E}.Release|x86.Build.0 = Release|Win32
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Debug|x64.ActiveCfg = Debug|x64
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Debug|x64.Build.0 = Debug|x64
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Debug|x86.ActiveCfg = Debug|Win32
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Debug|x86.Build.0 = Debug|Win32
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Release|x64.ActiveCfg = Release|x64
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Release|x64.Build.0 = Release|x64
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Release|x86.ActiveCfg = Release|Win32
+		{81FDDF0D-C2E6-466C-BC06-F70270E881B8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75C7A056-EA5F-439A-807A-A729278E7384}
 	EndGlobalSection
 EndGlobal

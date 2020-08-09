@@ -9,6 +9,7 @@
 #pragma comment(lib, "dxgi.lib")
 
 #include "MinHook/include/MinHook.h" //detour x86&x64
+#include <atltime.h>
 
 typedef HRESULT(__stdcall *D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 
@@ -89,21 +90,46 @@ protected:
     CRITICAL_SECTION            m_criticalSection;
 };
 
-static void hookLog(const char* str)
-{
-    MyMutex::instance().lock();
 
-    FILE* f = fopen("d:/hooklog.txt", "at+");
 
-    DWORD dwCurrentTid = GetCurrentThreadId();
-    char buf[1024];
-    _snprintf(buf, sizeof(buf), "tid:%d msg:%s\r\n", dwCurrentTid, str);
-    fputs(buf, f);
-    fflush(f);
-    fclose(f);
+class MyLog {
+private:
+    MyLog();
+    MyLog(char* szLogPath) {
+        m_f = fopen(szLogPath, "wb");
+    }
 
-    MyMutex::instance().unlock();
-}
+    FILE* m_f;
+public:
+    ~MyLog() {
+        if (m_f != NULL) {
+            fclose(m_f);
+        }
+    }
+    static MyLog* m_pMyLog;
+   
+    static MyLog* Instance(char* szLogPath) {
+        if (m_pMyLog != NULL) {
+            return m_pMyLog;
+        }
+        m_pMyLog = new MyLog(szLogPath);
+        return m_pMyLog;
+   }
+
+    void hookLog(const char* str) {
+        MyMutex::instance().lock();
+
+        DWORD dwCurrentTid = GetCurrentThreadId();
+        char buf[1024];
+        _snprintf(buf, sizeof(buf), "tid:%d %s\r\n", dwCurrentTid, str);
+        fputs(buf, m_f);
+        fflush(m_f);
+
+        MyMutex::instance().unlock();
+   }
+};
+
+MyLog* MyLog::m_pMyLog = NULL;
 
 //==========================================================================================================================
 
@@ -111,7 +137,20 @@ static void ShowFPS(IDXGISwapChain* pSwapChain)
 {
     g_frameCounter.onFrameStart();
 
-    hookLog("present.");
+    CString strFps;
+    strFps.Format(_T("fps: %d "), g_nFPS);
+
+    CTime tm = CTime::GetCurrentTime();
+    
+    //CString strTm = tm.Format(_T("%Y-%m-%d"));
+    CString strTm;
+    strTm.Format("time: %d:%d:%d", tm.GetHour(), tm.GetMinute(), tm.GetSecond());
+
+    CString strLog =  strFps + strTm;
+
+    MyLog* pLog = MyLog::Instance("");
+
+    pLog->hookLog((const char*)((LPSTR)(LPCTSTR)strLog));
 
     DrawNumberTool::instance().drawNumber(pSwapChain, g_nFPS);
 }
@@ -232,11 +271,13 @@ BOOL __stdcall DllMain(HINSTANCE hModule, DWORD dwReason, LPVOID lpReserved)
 	case DLL_PROCESS_ATTACH: // A process is loading the DLL.
 		DisableThreadLibraryCalls(hModule);
 		CreateThread(NULL, 0, InitializeHook, NULL, 0, NULL);
+        MyLog::Instance("C:\\Users\\Administrator\\Desktop\\fpslog.txt");
 		break;
 
 	case DLL_PROCESS_DETACH: // A process unloads the DLL.
 		if (MH_Uninitialize() != MH_OK) { return 1; }
 		if (MH_DisableHook((DWORD_PTR*)pSwapChainVtable[8]) != MH_OK) { return 1; }
+        delete MyLog::Instance("");
 		break;
 	}
 	return TRUE;

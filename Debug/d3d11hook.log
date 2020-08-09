@@ -1,0 +1,80 @@
+﻿  Microsoft (R) Direct3D Shader Compiler 10.1
+  Copyright (C) 2013 Microsoft. All rights reserved.
+  
+  compilation PDB save succeeded; see DrawNumber.pdb
+  compilation header save succeeded; see F:\github\D3D11-Wallhack\DrawNumberVS.h
+  Microsoft (R) Direct3D Shader Compiler 10.1
+  Copyright (C) 2013 Microsoft. All rights reserved.
+  
+  compilation PDB save succeeded; see DrawNumber.pdb
+  compilation header save succeeded; see F:\github\D3D11-Wallhack\DrawNumberPS.h
+  DrawNumber.cpp
+F:\github\D3D11-Wallhack\DrawNumber.cpp(446,5): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  ReadImage.cpp
+  universal.cpp
+F:\github\D3D11-Wallhack\universal.cpp(99,15): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\universal.cpp(124,9): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  正在生成代码...
+  filter_sse2_intrinsics.c
+  intel_init.c
+  png.c
+  pngerror.c
+  pngget.c
+  pngmem.c
+  pngpread.c
+  pngread.c
+F:\github\D3D11-Wallhack\libpng\pngread.c(1502,21): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\libpng\pngread.c(1518,43): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  pngrio.c
+  pngrtran.c
+  pngrutil.c
+  pngset.c
+  pngtrans.c
+  pngwio.c
+  pngwrite.c
+F:\github\D3D11-Wallhack\libpng\pngwrite.c(491,11): warning C4996: 'gmtime': This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\libpng\pngwrite.c(2338,21): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\libpng\pngwrite.c(2366,46): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\libpng\pngwrite.c(2379,43): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  pngwtran.c
+  pngwutil.c
+  buffer.c
+  hde32.c
+  hde64.c
+  正在生成代码...
+  正在编译...
+  hook.c
+  trampoline.c
+  adler32.c
+  compress.c
+  crc32.c
+  deflate.c
+  gzclose.c
+  gzlib.c
+F:\github\D3D11-Wallhack\zlib\gzlib.c(193,15): warning C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(208,13): warning C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(214,9): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(243,20): warning C4996: '_wopen': This function or variable may be unsafe. Consider using _wsopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(245,9): warning C4996: 'open': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _open. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(294,5): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzlib.c(607,5): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  gzread.c
+F:\github\D3D11-Wallhack\zlib\gzread.c(30,15): warning C4996: 'read': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _read. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzread.c(36,34): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzread.c(591,11): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _close. See online help for details.
+  gzwrite.c
+F:\github\D3D11-Wallhack\zlib\gzwrite.c(84,15): warning C4996: 'write': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _write. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzwrite.c(86,38): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzwrite.c(101,33): warning C4996: 'write': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _write. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzwrite.c(103,42): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+F:\github\D3D11-Wallhack\zlib\gzwrite.c(573,9): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _close. See online help for details.
+  infback.c
+  inffast.c
+  inflate.c
+  inftrees.c
+  trees.c
+  uncompr.c
+  zutil.c
+  正在生成代码...
+    正在创建库 F:\github\inject\Debug\d3d11hook.lib 和对象 F:\github\inject\Debug\d3d11hook.exp
+  d3d11hook.vcxproj -> F:\github\inject\Debug\d3d11hook.dll
